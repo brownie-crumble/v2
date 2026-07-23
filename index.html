@@ -8,23 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:    #F6F1E6;
-  --paper2:   #EEE6D3;
-  --card:     #FBF8F1;
-  --ink:      #2A241C;
-  --ink-soft: #5C5041;
-  --ink-faint:#8A7C68;
-  --amber:    #B97318;
-  --amber-soft: #E4A64B;
-  --teal:     #3E7C74;
-  --teal-soft:#DCEBE8;
-  --rule:     #DED1B4;
-  --rule2:    #E9DFC7;
-  --diff-add: #2E7D46;
+  --paper:    #F3F1E9;
+  --paper2:   #E9E7DA;
+  --card:     #FAF9F3;
+  --ink:      #2B2E28;
+  --ink-soft: #565C50;
+  --ink-faint:#8B927F;
+  --amber:    #6E8F6B;
+  --amber-soft: #B7CBAE;
+  --teal:     #7A6F8C;
+  --teal-soft:#E6E2ED;
+  --rule:     #D8D6C4;
+  --rule2:    #E4E2D3;
+  --diff-add: #4C7A4E;
   --diff-add-bg: #E3F2E5;
-  --diff-del: #B23B2E;
-  --diff-del-bg: #F7E4DF;
-  --shadow:   0 1px 2px rgba(42,36,28,0.06), 0 6px 20px rgba(42,36,28,0.05);
+  --diff-del: #A9705E;
+  --diff-del-bg: #F5E9E2;
+  --shadow:   0 1px 2px rgba(43,46,40,0.06), 0 6px 20px rgba(43,46,40,0.05);
   --ease: cubic-bezier(0.16,1,0.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -35,8 +35,8 @@ body{
   font-family:'Lora',serif;
   -webkit-font-smoothing:antialiased;
   background-image:
-    linear-gradient(rgba(185,115,24,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(185,115,24,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(110,143,107,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,143,107,0.06) 1px, transparent 1px);
   background-size:34px 34px;
 }
 a{color:inherit;}
@@ -105,8 +105,17 @@ section:first-of-type{padding-top:20px;}
 section.hero{padding-top:56px;}
 
 /* ── Hero ───────────────────────────────────────── */
-.hero{border-left:none;margin-left:-34px;padding-left:0;}
-.hero-inner{padding-left:0;}
+.hero{
+  border-left:none;margin-left:-34px;padding-left:0;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.hero-inner{padding-left:0;flex:1;min-width:280px;}
+.ascii-girl{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;line-height:1.15;color:var(--amber);
+  white-space:pre;flex-shrink:0;margin-top:8px;
+  opacity:0.85;
+}
 .hero .eyebrow{margin-bottom:16px;}
 .hero h1{
   font-size:4.6rem;line-height:0.94;margin-bottom:14px;
@@ -270,13 +279,22 @@ footer{
 
 /* ── Mobile ─────────────────────────────────────── */
 @media(max-width:640px){
+  .shell{padding:0 16px;}
+  .topnav{padding:12px 16px;}
   .topnav nav{display:none;}
-  .hero h1{font-size:2.1rem;}
-  .story{padding-left:22px;}
-  .node{left:-8px;}
-  section{padding:40px 0 40px 8px;}
+  .hero{flex-direction:column;}
+  .hero h1{font-size:2.4rem;}
+  .ascii-girl{font-size:0.6rem;margin:4px auto 0;order:-1;}
+  .story{padding-left:20px;border-left-width:2px;}
+  .node{left:-11px;width:18px;height:18px;}
+  .node svg{width:11px;height:11px;}
+  section{padding:36px 0 36px 6px;}
   .xp-head{flex-direction:column;gap:2px;}
-  .stickynote{transform:none;}
+  .changelog{max-width:100%;}
+  .changelog-line{font-size:0.74rem;white-space:normal;}
+  .proj-grid{grid-template-columns:1fr;}
+  .contact-card{padding:18px;}
+  .edu{flex-wrap:wrap;}
 }
 </style>
 </head>
@@ -301,11 +319,11 @@ footer{
     <div class="hero-inner">
       <div class="eyebrow">Project Associate I · Analog &amp; RF Systems Lab, IISc</div>
       <h1>Pujitha<br><span class="mark">Padmanabha</span></h1>
-      <div class="role">Hardware engineer, currently living inside register maps and protocol stacks.</div>
+      <div class="role">Hardware engineer — RTL/VLSI at heart, now building embedded systems too.</div>
       <p class="bio">
-        I came up through RTL and VLSI — Verilog, ASICs, cache verification — and I'm now deep in embedded
-        systems: STM32 firmware, communication protocols, and the analog/RF side of hardware at IISc.
-        I like the kind of bug that turns out to be one wrong memory region.
+        I came up through RTL and VLSI — Verilog, ASICs, cache verification — and still love that world.
+        Lately I'm also deep in embedded systems: STM32 firmware, communication protocols, and the analog/RF
+        side of hardware at IISc. I like the kind of bug that turns out to be one wrong memory region.
       </p>
       <div class="hero-tags">
         <span class="pill">STM32H7</span>
@@ -318,6 +336,19 @@ footer{
         <a class="btn" href="mailto:pujitha.2104@gmail.com">Say hi</a>
       </div>
     </div>
+    <pre class="ascii-girl" aria-hidden="true">
+      .--.
+     /    \
+    | ()  () |
+    |   ..   |
+     \  __  /
+      '----'
+     /|    |\
+    / |    | \
+      |    |
+     /|    |\
+    ' '    ' '
+    </pre>
   </section>
 
   <div class="story">
@@ -331,8 +362,8 @@ footer{
           <span class="fname">CHANGELOG.md — pujitha@arsl</span>
         </div>
         <div class="changelog-body">
-          <div class="changelog-line del"><span class="ln">-</span> RTL / VLSI engineer, thinking in gate-level timing.</div>
-          <div class="changelog-line add"><span class="ln">+</span> Embedded systems engineer — STM32, protocols, firmware.</div>
+          <div class="changelog-line ctx"><span class="ln"> </span> RTL / VLSI engineer — gate-level timing, ASICs, Verilog.</div>
+          <div class="changelog-line add"><span class="ln">+</span> Now also building: STM32, protocols, embedded firmware.</div>
           <div class="changelog-line ctx"><span class="ln"> </span> Currently in progress at the Analog &amp; RF Systems Lab, IISc.</div>
           <div class="changelog-line ctx"><span class="ln"> </span> Details confidential for now — ask me about it directly.</div>
           <span class="tstamp">status · in progress · July 2026</span>
