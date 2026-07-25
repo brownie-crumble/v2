@@ -303,8 +303,8 @@ footer{
         <div class="term-line"><span class="prompt">$</span> whoami</div>
         <div class="term-out" id="typedName" aria-live="polite"></div>
         <div class="term-role" id="typedRole" aria-live="polite"></div>
-        <p class="term-bio">I like figuring out how things work at the logic and circuit level — these days
-        that's STM32 firmware, embedded protocols, and the occasional dive into RTL and analog/RF over at
+        <p class="term-bio">I like figuring out how things work at the logic and circuit level, these days
+        that's STM32 firmware, embedded protocols, and the occasional dive into RF over at
         IISc. I'm happiest hands-on: chasing a signal that shouldn't be doing what it's doing until it
         finally clicks. When I'm not caught up in waveforms, I'm probably reading a thriller or messing
         around with some random idea just for fun.</p>
@@ -315,7 +315,7 @@ footer{
           <span class="pill">Analog &amp; RF</span>
         </div>
         <div class="hero-actions">
-          <a class="btn primary" href="RESUME_PUJITHA_PADMANABHA_.PDF" target="_blank" rel="noopener">View résumé</a>
+          <a class="btn primary" href="Resume_Pujitha_Padmanabha_.pdf" target="_blank" rel="noopener">View résumé</a>
           <a class="btn" href="mailto:pujitha.2104@gmail.com">Say hi</a>
         </div>
       </div>
@@ -338,8 +338,8 @@ footer{
       <div>
         <div class="xp-co">Analog &amp; RF Systems Lab, IISc</div>
         <div class="xp-role">Project Associate</div>
-        <p>Embedded systems work — STM32-based firmware and protocol-level development. Project details
-        are confidential.</p>
+        <p>STM32-based firmware and protocol-level work thathas to integrate tightly with the lab's RF systems. It's the kind of project where the interesting part is making two very
+        different worlds (embedded software and RF hardware) actually talk to each other.</p>
       </div>
     </div>
 
@@ -348,8 +348,10 @@ footer{
       <div>
         <div class="xp-co">Frauscher Sensor Technology</div>
         <div class="xp-role">Application Engineering Intern</div>
-        <p>Hardware testing &amp; signal analysis for railway sensor systems — PCB circuit analysis, system
-        configuration, performance validation, and optimized diagnostic testing sequences.</p>
+        <p>Got introduced to how Indian railway interlocking systems actually work, then went deep on the
+        wheel sensor circuitry inside Axle Counter systems, the kind of hardware that has zero tolerance
+        for error. Spent most of my time in PCB-level circuit analysis, system configuration, and
+        building out cleaner diagnostic testing sequences.</p>
       </div>
     </div>
 
@@ -358,8 +360,11 @@ footer{
       <div>
         <div class="xp-co">IEEE Circuits and Systems Society</div>
         <div class="xp-role">Engineering Intern</div>
-        <p>Implemented an iterative ChaCha20 cryptographic core (8/12/20 rounds) in Xilinx Vivado on FPGA —
-        <strong>4.27 Gbps</strong> peak throughput.</p>
+        <p>Took an open-source ChaCha20 core and made it hardware-real ,adapted and integrated the
+        architecture in Xilinx Vivado, wrote verification testbenches, and validated
+        functional correctness on FPGA. Got the iterative core (8/12/20 rounds) to <strong>4.27 Gbps</strong>
+        peak throughput after digging through synthesis results and resource utilization to land on a
+        stable operating frequency.</p>
       </div>
     </div>
 
@@ -368,8 +373,8 @@ footer{
       <div>
         <div class="xp-co">ABB India Limited</div>
         <div class="xp-role">Student Intern</div>
-        <p>Industrial drive systems (VFDs), fault analysis, and power electronics troubleshooting. Built a
-        digital fault-tracking system to streamline maintenance workflows.</p>
+        <p>Three months elbow-deep in industrial drive systems, testing 3-phase bridge rectifiers, and 3-phase bridge inverters, then chasing down VFD faults on the floor. Built a
+        digital fault-tracking tool with Power Apps and Power BI so the team could actually see what was breaking and why, instead of digging through the logs.</p>
       </div>
     </div>
 
@@ -378,8 +383,9 @@ footer{
       <div>
         <div class="xp-co">Robomanthan Pvt Ltd</div>
         <div class="xp-role">Robotics Intern</div>
-        <p>ESP32 &amp; Arduino robotic systems — gesture lighting, Bluetooth bots, OpenCV colour tracking,
-        Python Roomba simulation.</p>
+        <p>Bounced between a handful of small ESP32 and Arduino builds — gesture-controlled lighting, a
+        Bluetooth-controlled bot, OpenCV-based colour tracking, and a Python simulation of a Roomba
+        finding its way around a room.</p>
       </div>
     </div>
 
@@ -388,7 +394,9 @@ footer{
       <div>
         <div class="xp-co">Samsung Innovation Campus</div>
         <div class="xp-role">Student Trainee</div>
-        <p>Python-based ML pipeline on Kaggle datasets to detect fraudulent job postings.</p>
+        <p>One of 35 selected for the program, learned Python and data analysis through hands-on quizzes
+        and prediction models, then wrapped up with a full ML pipeline on Kaggle data to catch fraudulent
+        job postings.</p>
       </div>
     </div>
   </section>
@@ -399,28 +407,36 @@ footer{
       <div class="proj">
         <span class="proj-tag">ASIC · RTL · Cryptography</span>
         <h3>ASIC-Oriented RTL Implementation of ASCON-128</h3>
-        <p>Verilog implementation comparing serial and unrolled architectures with mixed-cycle PPA
-        optimization and FPGA validation. Published in IJSEI; won a Best Project Award.</p>
+        <p>IoT devices are everywhere, and Ascon-128, NIST's lightweight authenticated encryption
+        standard, was built for exactly this. We took it from spec to silicon: first exploring the two
+        extremes (fully serial for minimal area, fully unrolled for max throughput), neither of which fit
+        real IoT constraints, then landed on a mixed iterative architecture that folds the 320-bit
+        permutation rounds for a practical area-throughput balance. Months of waveform debugging and
+        timing closure later — published in IJSEI, and won a Best Project Award.</p>
         <div class="proj-chips"><span class="chip-sm">Verilog</span><span class="chip-sm">ASIC</span><span class="chip-sm">FPGA</span></div>
       </div>
       <div class="proj">
         <span class="proj-tag">Cache · Verification</span>
         <h3>MSHR-Based Non-Blocking Cache Verification</h3>
-        <p>2-way set-associative non-blocking cache with 4-entry coalescing MSHRs, verified with a
-        self-checking Verilog testbench.</p>
+        <p>Built and verified a 2-way set-associative non-blocking cache with 4-entry coalescing MSHRs, 
+        the structures that let a cache keep issuing requests on a miss instead of stalling dead until it
+        comes back. Wrote a self-checking Verilog testbench to catch the edge cases where things quietly
+        go wrong.</p>
         <div class="proj-chips"><span class="chip-sm">Verilog</span><span class="chip-sm">Cache</span><span class="chip-sm">Testbench</span></div>
       </div>
       <div class="proj">
         <span class="proj-tag">ML · Security</span>
         <h3>Network Traffic Anomaly Detection</h3>
-        <p>MATLAB-based ML model detecting DDoS, MITM, and SQL injection patterns with 90% accuracy.</p>
+        <p>A MATLAB-based ML model trained to spot the fingerprints of DDoS, MITM, and SQL injection
+        attacks buried in network traffic, hitting 90% detection accuracy.</p>
         <div class="proj-chips"><span class="chip-sm">MATLAB</span><span class="chip-sm">ML</span></div>
       </div>
       <div class="proj">
         <span class="proj-tag">IoT · Embedded</span>
         <h3>Music-Reactive Lights</h3>
-        <p>Arduino lighting system reacting to audio signals in real time, with customizable colour
-        effects and threshold tuning.</p>
+        <p>An Arduino build that listens to audio in real time and reacts to it — colour and pattern
+        shift with the signal, with tunable thresholds so it responds right for different kinds of
+        music.</p>
         <div class="proj-chips"><span class="chip-sm">Arduino</span><span class="chip-sm">IoT</span><span class="chip-sm">Audio DSP</span></div>
       </div>
     </div>
