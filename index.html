@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pujitha Padmanabha — Hardware &amp; Embedded Systems</title>
+<meta name="description" content="Pujitha Padmanabha — Hardware & Embedded Systems Engineer. STM32 firmware, embedded protocols, and RTL/VLSI design. Currently at the Analog & RF Systems Lab, IISc.">
+<meta property="og:title" content="Pujitha Padmanabha — Hardware & Embedded Systems">
+<meta property="og:description" content="STM32 firmware, embedded protocols, and RTL/VLSI design. Currently at the Analog & RF Systems Lab, IISc.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0F0B'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='700' fill='%236FDDA0' text-anchor='middle'%3E%3E%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -17,10 +23,29 @@
   --green-dim: #3E7C5A;
   --white:     #EAF2EA;
   --dim:       #7C9184;
-  --faint:     #4C5D51;
+  --faint:     #6B8177;
   --amber:     #E3B23C;
   --shadow:    0 18px 50px rgba(0,0,0,0.5);
+  color-scheme: dark;
 }
+html[data-theme="light"]{
+  --bg:        #F7F5EF;
+  --bg2:       #EFEBE1;
+  --panel:     #FFFDF8;
+  --panel2:    #F5F1E7;
+  --rule:      #E4DFD1;
+  --green:     #4F9271;
+  --green-dim: #6E9481;
+  --white:     #2E2D26;
+  --dim:       #6B695C;
+  --faint:     #8C8A7A;
+  --amber:     #AD8A50;
+  --shadow:    0 18px 40px rgba(46,45,38,0.07);
+  color-scheme: light;
+}
+html[data-theme="light"] body::before{opacity:0.4;}
+html[data-theme="light"] .btn.primary:hover{background:var(--green-dim);color:#FFFDF8;}
+html[data-theme="light"] .btn:not(.primary):hover{background:var(--green-dim);color:#FFFDF8;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
@@ -59,7 +84,29 @@ p{color:var(--dim);line-height:1.75;}
   letter-spacing:0.08em;color:var(--dim);text-decoration:none;transition:color .15s ease;
 }
 .topnav nav a:hover{color:var(--green);}
-@media(max-width:700px){.topnav nav{display:none;}}
+.topnav-actions{display:flex;align-items:center;gap:10px;}
+.theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  background:none;border:1px solid var(--rule);border-radius:4px;
+  width:32px;height:32px;cursor:pointer;color:var(--dim);font-size:0.9rem;
+  transition:border-color .15s ease,color .15s ease;
+}
+.theme-toggle:hover{border-color:var(--green);color:var(--green);}
+.theme-toggle .icon-sun{display:none;}
+.theme-toggle .icon-moon{display:block;}
+html[data-theme="light"] .theme-toggle .icon-sun{display:block;}
+html[data-theme="light"] .theme-toggle .icon-moon{display:none;}
+.nav-toggle{display:none;background:none;border:1px solid var(--rule);border-radius:4px;padding:7px 9px;cursor:pointer;}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--white);margin:3px 0;transition:transform .15s ease,opacity .15s ease;}
+@media(max-width:700px){
+  .topnav nav{
+    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--panel);border-bottom:1px solid var(--rule);padding:8px 0;
+  }
+  .topnav nav.open{display:flex;}
+  .topnav nav a{padding:12px 24px;}
+  .nav-toggle{display:block;}
+}
 
 .shell{max-width:900px;margin:0 auto;padding:0 32px;}
 
@@ -139,8 +186,8 @@ section{padding:60px 0;border-top:1px solid var(--rule);}
 .xp:last-child{border-bottom:none;}
 .xp-date{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--faint);padding-top:3px;}
 .xp-date.current{color:var(--amber);}
-.xp-role{font-family:'Inter',sans-serif;font-weight:700;font-size:1.02rem;color:var(--white);}
-.xp-co{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--green);margin-top:3px;}
+.xp-co{font-family:'Inter',sans-serif;font-weight:700;font-size:1.02rem;color:var(--white);}
+.xp-role{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--green);margin-top:3px;}
 .xp p{font-size:0.9rem;margin-top:9px;max-width:60ch;}
 .xp p strong{color:var(--green);font-weight:600;}
 @media(max-width:640px){.xp{grid-template-columns:1fr;gap:5px;}}
@@ -215,18 +262,33 @@ footer{
   letter-spacing:0.05em;border-top:1px solid var(--rule);
 }
 </style>
+<script>
+(function(){
+  var saved = localStorage.getItem('theme');
+  var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
 </head>
 <body>
 
 <div class="topnav">
   <div class="brand">pujitha<span class="cursor-dot">_</span>padmanabha</div>
-  <nav>
+  <nav id="mainNav">
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
   </nav>
+  <div class="topnav-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+      <span class="icon-moon">☾</span><span class="icon-sun">☀</span>
+    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </div>
 
 <div class="shell">
@@ -239,12 +301,13 @@ footer{
       </div>
       <div class="term-body">
         <div class="term-line"><span class="prompt">$</span> whoami</div>
-        <div class="term-out" id="typedName"></div>
-        <div class="term-role" id="typedRole"></div>
-        <p class="term-bio">I work across embedded systems and chip design — STM32 firmware, communication
-        protocols, and RTL in Verilog, plus the analog/RF side of hardware at IISc. I like getting into
-        the weeds of a system, and I'm always happiest when a stubborn bug turns out to be one wrong
-        memory region.</p>
+        <div class="term-out" id="typedName" aria-live="polite"></div>
+        <div class="term-role" id="typedRole" aria-live="polite"></div>
+        <p class="term-bio">I like figuring out how things work at the logic and circuit level — these days
+        that's STM32 firmware, embedded protocols, and the occasional dive into RTL and analog/RF over at
+        IISc. I'm happiest hands-on: chasing a signal that shouldn't be doing what it's doing until it
+        finally clicks. When I'm not caught up in waveforms, I'm probably reading a thriller or messing
+        around with some random idea just for fun.</p>
         <div class="hero-tags">
           <span class="pill">STM32H7</span>
           <span class="pill">Embedded Protocols</span>
@@ -252,7 +315,7 @@ footer{
           <span class="pill">Analog &amp; RF</span>
         </div>
         <div class="hero-actions">
-          <a class="btn primary" href="Resume_Pujitha_Padmanabha_.pdf" target="_blank" rel="noopener">View résumé</a>
+          <a class="btn primary" href="RESUME_PUJITHA_PADMANABHA_.PDF" target="_blank" rel="noopener">View résumé</a>
           <a class="btn" href="mailto:pujitha.2104@gmail.com">Say hi</a>
         </div>
       </div>
@@ -262,7 +325,7 @@ footer{
   <div class="status">
     <span class="led"></span>
     <div class="txt">
-      <strong>Project Associate I, Analog &amp; RF Systems Lab, IISc</strong> — embedded systems,
+      <strong>Analog &amp; RF Systems Lab, IISc — Project Associate</strong> — embedded systems,
       STM32-based firmware, and integration with the lab's RF systems.
     </div>
   </div>
@@ -273,8 +336,8 @@ footer{
     <div class="xp">
       <div class="xp-date current">Current</div>
       <div>
-        <div class="xp-role">Project Associate I</div>
         <div class="xp-co">Analog &amp; RF Systems Lab, IISc</div>
+        <div class="xp-role">Project Associate</div>
         <p>Embedded systems work — STM32-based firmware and protocol-level development. Project details
         are confidential.</p>
       </div>
@@ -283,8 +346,8 @@ footer{
     <div class="xp">
       <div class="xp-date">Nov '25 – May '26</div>
       <div>
-        <div class="xp-role">Application Engineering Intern</div>
         <div class="xp-co">Frauscher Sensor Technology</div>
+        <div class="xp-role">Application Engineering Intern</div>
         <p>Hardware testing &amp; signal analysis for railway sensor systems — PCB circuit analysis, system
         configuration, performance validation, and optimized diagnostic testing sequences.</p>
       </div>
@@ -293,8 +356,8 @@ footer{
     <div class="xp">
       <div class="xp-date">Oct – Dec '25</div>
       <div>
-        <div class="xp-role">Engineering Intern</div>
         <div class="xp-co">IEEE Circuits and Systems Society</div>
+        <div class="xp-role">Engineering Intern</div>
         <p>Implemented an iterative ChaCha20 cryptographic core (8/12/20 rounds) in Xilinx Vivado on FPGA —
         <strong>4.27 Gbps</strong> peak throughput.</p>
       </div>
@@ -303,8 +366,8 @@ footer{
     <div class="xp">
       <div class="xp-date">Jul – Oct '25</div>
       <div>
-        <div class="xp-role">Student Intern</div>
         <div class="xp-co">ABB India Limited</div>
+        <div class="xp-role">Student Intern</div>
         <p>Industrial drive systems (VFDs), fault analysis, and power electronics troubleshooting. Built a
         digital fault-tracking system to streamline maintenance workflows.</p>
       </div>
@@ -313,8 +376,8 @@ footer{
     <div class="xp">
       <div class="xp-date">Aug – Sep '24</div>
       <div>
-        <div class="xp-role">Robotics Intern</div>
         <div class="xp-co">Robomanthan Pvt Ltd</div>
+        <div class="xp-role">Robotics Intern</div>
         <p>ESP32 &amp; Arduino robotic systems — gesture lighting, Bluetooth bots, OpenCV colour tracking,
         Python Roomba simulation.</p>
       </div>
@@ -323,8 +386,8 @@ footer{
     <div class="xp">
       <div class="xp-date">Oct – Dec '23</div>
       <div>
-        <div class="xp-role">Student Trainee</div>
         <div class="xp-co">Samsung Innovation Campus</div>
+        <div class="xp-role">Student Trainee</div>
         <p>Python-based ML pipeline on Kaggle datasets to detect fraudulent job postings.</p>
       </div>
     </div>
@@ -449,15 +512,40 @@ footer{
         <a class="clink" href="https://github.com/brownie-crumble" target="_blank"><span class="lb">GitHub</span><span class="vl">github.com/brownie-crumble</span></a>
         <div class="clink" style="cursor:default"><span class="lb">Based in</span><span class="vl">Bengaluru, India</span></div>
       </div>
-      <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">View résumé</a>
+      <a class="btn primary" href="RESUME_PUJITHA_PADMANABHA_.PDF" target="_blank" rel="noopener">View résumé</a>
     </div>
   </section>
 
 </div>
 
-<footer>made by hand, currently running on very little sleep and too much coffee · updated jul 2026</footer>
+<footer>made by hand · updated jul 2026</footer>
 
 <script>
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
+(function(){
+  var themeBtn = document.getElementById('themeToggle');
+  themeBtn.addEventListener('click', function(){
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+})();
+
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var nameEl = document.getElementById('typedName');
