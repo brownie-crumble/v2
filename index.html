@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pujitha Padmanabha — Hardware &amp; Embedded Systems</title>
-<meta name="description" content="Pujitha Padmanabha — Hardware & Embedded Systems Engineer. STM32 firmware, embedded protocols, and RTL/VLSI design. Currently at the Analog & RF Systems Lab, IISc.">
-<meta property="og:title" content="Pujitha Padmanabha — Hardware & Embedded Systems">
+<title>Pujitha Padmanabha · Hardware &amp; Embedded Systems</title>
+<meta name="description" content="Pujitha Padmanabha · Hardware & Embedded Systems Engineer. STM32 firmware, embedded protocols, and RTL/VLSI design. Currently at the Analog & RF Systems Lab, IISc.">
+<meta property="og:title" content="Pujitha Padmanabha · Hardware & Embedded Systems">
 <meta property="og:description" content="STM32 firmware, embedded protocols, and RTL/VLSI design. Currently at the Analog & RF Systems Lab, IISc.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
@@ -26,6 +26,8 @@
   --faint:     #6B8177;
   --amber:     #E3B23C;
   --shadow:    0 18px 50px rgba(0,0,0,0.5);
+  --grid:      rgba(111,221,160,0.055);
+  --nav-bg:    rgba(10,15,11,0.9);
   color-scheme: dark;
 }
 html[data-theme="light"]{
@@ -41,6 +43,8 @@ html[data-theme="light"]{
   --faint:     #8C8A7A;
   --amber:     #AD8A50;
   --shadow:    0 18px 40px rgba(46,45,38,0.07);
+  --grid:      rgba(46,45,38,0.05);
+  --nav-bg:    rgba(247,245,239,0.88);
   color-scheme: light;
 }
 html[data-theme="light"] body::before{opacity:0.4;}
@@ -51,7 +55,11 @@ html{scroll-behavior:smooth;}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
 
 body{
-  background:var(--bg);
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size:48px 48px;
   color:var(--white);
   font-family:'Inter',sans-serif;
   -webkit-font-smoothing:antialiased;
@@ -73,7 +81,7 @@ p{color:var(--dim);line-height:1.75;}
 .topnav{
   position:sticky;top:0;z-index:80;
   display:flex;align-items:center;justify-content:space-between;
-  padding:16px 32px;background:rgba(10,15,11,0.9);backdrop-filter:blur(10px);
+  padding:16px 32px;background:var(--nav-bg);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--rule);
 }
 .topnav .brand{font-family:'IBM Plex Mono',monospace;font-size:0.82rem;font-weight:600;letter-spacing:0.01em;color:var(--white);}
@@ -297,7 +305,7 @@ footer{
     <div class="term">
       <div class="term-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="fname">whoami — pujitha</span>
+        <span class="fname">whoami: pujitha</span>
       </div>
       <div class="term-body">
         <div class="term-line"><span class="prompt">$</span> whoami</div>
@@ -325,7 +333,7 @@ footer{
   <div class="status">
     <span class="led"></span>
     <div class="txt">
-      <strong>Analog &amp; RF Systems Lab, IISc — Project Associate</strong> — embedded systems,
+      <strong>Analog &amp; RF Systems Lab, IISc, Project Associate:</strong> embedded systems,
       STM32-based firmware, and integration with the lab's RF systems.
     </div>
   </div>
@@ -360,7 +368,7 @@ footer{
       <div>
         <div class="xp-co">IEEE Circuits and Systems Society</div>
         <div class="xp-role">Engineering Intern</div>
-        <p>Took an open-source ChaCha20 core and made it hardware-real — adapted and integrated the
+        <p>Took an open-source ChaCha20 core and made it hardware-real: adapted and integrated the
         architecture in Xilinx Vivado, wrote verification testbenches, and validated
         functional correctness on FPGA. Got the iterative core (8/12/20 rounds) to <strong>4.27 Gbps</strong>
         peak throughput after digging through synthesis results and resource utilization to land on a
@@ -383,7 +391,7 @@ footer{
       <div>
         <div class="xp-co">Robomanthan Pvt Ltd</div>
         <div class="xp-role">Robotics Intern</div>
-        <p>Bounced between a handful of small ESP32 and Arduino builds — gesture-controlled lighting, a
+        <p>Bounced between a handful of small ESP32 and Arduino builds: gesture-controlled lighting, a
         Bluetooth-controlled bot, OpenCV-based colour tracking, and a Python simulation of a Roomba
         finding its way around a room.</p>
       </div>
@@ -412,13 +420,13 @@ footer{
         extremes (fully serial for minimal area, fully unrolled for max throughput), neither of which fit
         real IoT constraints, then landed on a mixed iterative architecture that folds the 320-bit
         permutation rounds for a practical area-throughput balance. Months of waveform debugging and
-        timing closure later — published in IJSEI, and won a Best Project Award.</p>
+        timing closure later. Published in IJSEI, and won a Best Project Award.</p>
         <div class="proj-chips"><span class="chip-sm">Verilog</span><span class="chip-sm">ASIC</span><span class="chip-sm">FPGA</span></div>
       </div>
       <div class="proj">
         <span class="proj-tag">Cache · Verification</span>
         <h3>MSHR-Based Non-Blocking Cache Verification</h3>
-        <p>Built and verified a 2-way set-associative non-blocking cache with 4-entry coalescing MSHRs —
+        <p>Built and verified a 2-way set-associative non-blocking cache with 4-entry coalescing MSHRs,
         the structures that let a cache keep issuing requests on a miss instead of stalling dead until it
         comes back. Wrote a self-checking Verilog testbench to catch the edge cases where things quietly
         go wrong.</p>
@@ -434,7 +442,7 @@ footer{
       <div class="proj">
         <span class="proj-tag">IoT · Embedded</span>
         <h3>Music-Reactive Lights</h3>
-        <p>An Arduino build that listens to audio in real time and reacts to it — colour and pattern
+        <p>An Arduino build that listens to audio in real time and reacts to it: colour and pattern
         shift with the signal, with tunable thresholds so it responds right for different kinds of
         music.</p>
         <div class="proj-chips"><span class="chip-sm">Arduino</span><span class="chip-sm">IoT</span><span class="chip-sm">Audio DSP</span></div>
@@ -520,7 +528,7 @@ footer{
     <div class="sec-head"><span class="num">05</span><h2>Get in touch</h2></div>
     <div class="contact-card">
       <h2>let's talk <span class="accent">hardware.</span></h2>
-      <p>Always happy to talk hardware, firmware, or RF systems — or to hear about interesting problems
+      <p>Always happy to talk hardware, firmware, or RF systems, or to hear about interesting problems
       in embedded and analog design.</p>
       <div class="contact-links">
         <a class="clink" href="mailto:pujitha.2104@gmail.com"><span class="lb">Email</span><span class="vl">pujitha.2104@gmail.com</span></a>
@@ -567,7 +575,7 @@ footer{
   var nameEl = document.getElementById('typedName');
   var roleEl = document.getElementById('typedRole');
   var nameText = 'Pujitha Padmanabha';
-  var roleText = '> hardware engineer — embedded systems, RTL/VLSI, analog & RF';
+  var roleText = '> hardware engineer: embedded systems, RTL/VLSI, analog & RF';
 
   if(reduce){
     nameEl.textContent = nameText;
