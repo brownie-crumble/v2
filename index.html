@@ -146,6 +146,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
 .term-out{
   font-size:2.6rem;line-height:1.18;color:var(--white);font-weight:700;
   margin:2px 0 6px;letter-spacing:-0.01em;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 .term-out .accent{color:var(--green);}
 .term-role{font-size:1.05rem;color:var(--green);margin:10px 0 22px;}
@@ -199,7 +200,8 @@ section{padding:38px 0;border-top:1px solid var(--rule);}
 .xp-date{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--faint);padding-top:3px;}
 .xp-date.current{color:var(--amber);}
 .xp-co{font-family:'Inter',sans-serif;font-weight:700;font-size:1.02rem;color:var(--white);}
-.xp-role{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--green);margin-top:3px;}
+.xp-role{font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--green);margin-top:3px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.xp-chevron{display:none;width:12px;height:12px;flex-shrink:0;color:var(--faint);transition:transform .18s ease;}
 .xp p{font-size:0.9rem;margin-top:6px;max-width:60ch;text-align:justify;hyphens:auto;}
 .xp p strong{color:var(--green);font-weight:600;}
 @media(max-width:640px){.xp{grid-template-columns:1fr;gap:5px;}}
@@ -354,7 +356,12 @@ footer{
 
   .xp{padding:9px 0;gap:3px;}
   .xp-co{font-size:0.94rem;}
-  .xp p{font-size:0.84rem;margin-top:4px;line-height:1.55;text-align:left;}
+  .xp-role{cursor:pointer;}
+  .xp-chevron{display:block;}
+  .xp p{font-size:0.84rem;margin-top:0;line-height:1.55;text-align:left;
+    max-height:0;overflow:hidden;opacity:0;transition:max-height .22s ease,opacity .18s ease,margin-top .22s ease;}
+  .xp.open p{max-height:400px;opacity:1;margin-top:7px;}
+  .xp.open .xp-chevron{transform:rotate(180deg);}
 
   .proj-grid{gap:10px;}
   .proj{padding:16px 18px;}
@@ -446,7 +453,7 @@ footer{
       <div class="xp-date current">Current</div>
       <div>
         <div class="xp-co">Analog &amp; RF Systems Lab, IISc</div>
-        <div class="xp-role">Project Associate</div>
+        <div class="xp-role"><span>Project Associate</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>STM32-based firmware and protocol-level work that has to integrate tightly with the lab's RF systems. It's the kind of project where the interesting part is making two very
         different worlds (embedded software and RF hardware) actually talk to each other.</p>
       </div>
@@ -456,7 +463,7 @@ footer{
       <div class="xp-date">Nov '25 – May '26</div>
       <div>
         <div class="xp-co">Frauscher Sensor Technology</div>
-        <div class="xp-role">Application Engineering Intern</div>
+        <div class="xp-role"><span>Application Engineering Intern</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>Got introduced to how Indian railway interlocking systems actually work, then went deep on the
         wheel sensor circuitry inside Axle Counter systems, the kind of hardware that has zero tolerance
         for error. Spent most of my time in PCB-level circuit analysis, system configuration, and
@@ -468,7 +475,7 @@ footer{
       <div class="xp-date">Oct – Dec '25</div>
       <div>
         <div class="xp-co">IEEE Circuits and Systems Society</div>
-        <div class="xp-role">Engineering Intern</div>
+        <div class="xp-role"><span>Engineering Intern</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>Took an open-source ChaCha20 core and made it hardware-real: adapted and integrated the
         architecture in Xilinx Vivado, wrote verification testbenches, and validated
         functional correctness on FPGA. Got the iterative core (8/12/20 rounds) to <strong>4.27 Gbps</strong>
@@ -481,7 +488,7 @@ footer{
       <div class="xp-date">Jul – Oct '25</div>
       <div>
         <div class="xp-co">ABB India Limited</div>
-        <div class="xp-role">Student Intern</div>
+        <div class="xp-role"><span>Student Intern</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>Three months elbow-deep in industrial drive systems, testing 3-phase bridge rectifiers and 3-phase bridge inverters, then chasing down VFD faults on the floor. Built a
         digital fault-tracking tool with Power Apps and Power BI so the team could actually see what was breaking and why, instead of digging through the logs.</p>
       </div>
@@ -491,7 +498,7 @@ footer{
       <div class="xp-date">Aug – Sep '24</div>
       <div>
         <div class="xp-co">Robomanthan Pvt Ltd</div>
-        <div class="xp-role">Robotics Intern</div>
+        <div class="xp-role"><span>Robotics Intern</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>Bounced between a handful of small ESP32 and Arduino builds: gesture-controlled lighting, a
         Bluetooth-controlled bot, OpenCV-based colour tracking, and a Python simulation of a Roomba
         finding its way around a room.</p>
@@ -502,7 +509,7 @@ footer{
       <div class="xp-date">Oct – Dec '23</div>
       <div>
         <div class="xp-co">Samsung Innovation Campus</div>
-        <div class="xp-role">Student Trainee</div>
+        <div class="xp-role"><span>Student Trainee</span><svg class="xp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         <p>One of 35 selected for the program, learned Python and data analysis through hands-on quizzes
         and prediction models, then wrapped up with a full ML pipeline on Kaggle data to catch fraudulent
         job postings.</p>
@@ -706,6 +713,17 @@ footer{
     var next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+  });
+})();
+
+(function(){
+  document.querySelectorAll('.xp').forEach(function(item){
+    var trigger = item.querySelector('.xp-role');
+    if(!trigger) return;
+    trigger.addEventListener('click', function(){
+      if(window.innerWidth > 640) return;
+      item.classList.toggle('open');
+    });
   });
 })();
 
