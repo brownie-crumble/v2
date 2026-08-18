@@ -14,21 +14,21 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:        #E7E9D3;
-  --bg2:       #DBDDC0;
-  --panel:     #F3F4E8;
-  --panel2:    #E7E9D3;
-  --rule:      #B7C0A6;
-  --tint:      #C7D6BC;
-  --green:     #2C341B;
+  --bg:        #F7F6F0;
+  --bg2:       #EEEDE3;
+  --panel:     #FFFFFF;
+  --panel2:    #F7F6F0;
+  --rule:      #DDDBCC;
+  --tint:      #E4E8DA;
+  --green:     #3A4A2C;
   --green-dim: #688A65;
   --white:     #262C18;
-  --dim:       #55604A;
-  --faint:     #7E8A70;
+  --dim:       #5B6350;
+  --faint:     #8B8A7A;
   --amber:     #7A6B35;
-  --shadow:    0 18px 40px rgba(38,44,24,0.12);
-  --grid:      rgba(44,52,27,0.07);
-  --nav-bg:    rgba(231,233,211,0.88);
+  --shadow:    0 18px 40px rgba(38,44,24,0.08);
+  --grid:      rgba(44,52,27,0.045);
+  --nav-bg:    rgba(247,246,240,0.88);
   color-scheme: light;
 }
 html[data-theme="dark"]{
@@ -331,6 +331,52 @@ footer{
   text-align:center;padding:36px 20px 60px;
   font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--faint);
   letter-spacing:0.05em;border-top:1px solid var(--rule);
+}
+
+/* ── mobile: cut the scroll, not just shrink type ── */
+@media(max-width:640px){
+  .topnav{padding:12px 20px;}
+  .shell{padding:0 20px;}
+  .hero{padding:24px 0 20px;}
+  .term-body{padding:20px 18px 22px;}
+  .term-line{line-height:1.6;}
+  .term-out{font-size:1.6rem;margin:0 0 4px;}
+  .term-role{font-size:0.92rem;margin:6px 0 14px;}
+  .term-bio{font-size:0.9rem;margin:12px 0 16px;line-height:1.55;text-align:left;}
+  .hero-tags{margin-bottom:16px;gap:6px;}
+  .pill{padding:5px 10px;font-size:0.65rem;}
+  .hero-actions{gap:8px;}
+  .btn{padding:10px 16px;font-size:0.7rem;}
+
+  section{padding:24px 0;}
+  .sec-head{margin-bottom:14px;}
+  .sec-head h2{font-size:0.92rem;}
+
+  .xp{padding:9px 0;gap:3px;}
+  .xp-co{font-size:0.94rem;}
+  .xp p{font-size:0.84rem;margin-top:4px;line-height:1.55;text-align:left;}
+
+  .proj-grid{gap:10px;}
+  .proj{padding:16px 18px;}
+
+  .skill-block{margin-bottom:12px;}
+  .skill-title{margin-bottom:7px;}
+  .skill-pills{gap:6px;}
+  .skill-pill{padding:5px 11px;font-size:0.78rem;}
+
+  .mind-card{padding:14px 16px;gap:10px;}
+  .mind-card p{font-size:0.86rem;line-height:1.55;}
+
+  .split{gap:22px;}
+  .edu{padding:8px 0;}
+  .pub{padding:8px 0;}
+
+  .contact-card{padding:24px 22px;}
+  .contact-card h2{font-size:1.3rem;margin-bottom:10px;}
+  .contact-card p{margin-bottom:18px;font-size:0.88rem;}
+  .contact-links{margin-bottom:18px;}
+
+  footer{padding:22px 20px 36px;}
 }
 </style>
 <script>
