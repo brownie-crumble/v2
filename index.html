@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pujitha Padmanabha — Embedded Systems Project Associate</title>
 <meta name="description" content="Pujitha Padmanabha, Embedded Systems Project Associate at the Analog & RF Systems Lab, IISc. STM32 firmware, embedded protocols, and RTL/VLSI design.">
+<meta property="og:title" content="Pujitha Padmanabha — Embedded Systems Project Associate">
+<meta property="og:description" content="STM32 firmware, embedded protocols, and RTL/VLSI design. Analog & RF Systems Lab, IISc.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pujitha Padmanabha — Embedded Systems Project Associate">
+<meta name="twitter:description" content="STM32 firmware, embedded protocols, and RTL/VLSI design. Analog & RF Systems Lab, IISc.">
+<meta name="twitter:image" content="og-image.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23384C8C'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-weight='700' font-size='13' fill='white' text-anchor='middle'%3EPP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +34,7 @@
   --line:#E4E4E1;
   --accent:#3A55A6;
   --accent-soft:#EEF1FA;
+  --pop:#FF6B4A;
   --grid:rgba(24,26,31,0.05);
   --sans:'Manrope',ui-sans-serif,system-ui,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -39,6 +48,7 @@ html[data-theme="dark"]{
   --line:#26292F;
   --accent:#7C93E0;
   --accent-soft:#1B2236;
+  --pop:#FF8266;
   --grid:rgba(237,238,240,0.045);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -65,7 +75,9 @@ p{color:var(--sub);line-height:1.7;font-size:.98rem;max-width:56ch;}
   border-radius:8px;transition:border-color .15s ease,color .15s ease;
 }
 .theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
-.theme-toggle svg{width:16px;height:16px;}
+.theme-toggle svg{width:16px;height:16px;transition:transform .3s ease;}
+.theme-toggle.spin svg{animation:toggle-spin .4s ease;}
+@keyframes toggle-spin{from{transform:rotate(0deg);}to{transform:rotate(180deg);}}
 .theme-toggle .i-sun{display:none;}
 html[data-theme="dark"] .theme-toggle .i-sun{display:block;}
 html[data-theme="dark"] .theme-toggle .i-moon{display:none;}
@@ -75,14 +87,34 @@ html[data-theme="dark"] .theme-toggle .i-moon{display:none;}
 .eyebrow{font-family:var(--mono);font-size:.82rem;color:var(--faint);margin-bottom:16px;}
 h1.name{font-weight:800;font-size:clamp(2.1rem,4.6vw,3.1rem);letter-spacing:-0.02em;line-height:1.08;}
 .role{font-size:1.08rem;color:var(--accent);font-weight:600;margin-top:10px;}
+.role-wrap{display:inline-block;}
+.role-doodle{display:block;width:100%;height:10px;margin-top:1px;overflow:visible;}
+.role-doodle path{
+  fill:none;stroke:var(--pop);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:420;stroke-dashoffset:420;
+  animation:draw-doodle 1s .3s ease forwards;
+}
+@keyframes draw-doodle{to{stroke-dashoffset:0;}}
 .bio{margin-top:18px;font-size:1rem;max-width:54ch;}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
 .btn{
   font-weight:600;font-size:.88rem;padding:11px 20px;border:1px solid var(--line);
   border-radius:8px;text-decoration:none;cursor:pointer;background:var(--panel);color:var(--ink);
-  transition:border-color .15s ease, background .15s ease;
+  transition:border-color .15s ease, background .15s ease, transform .15s ease;
+  display:inline-flex;align-items:center;gap:6px;
 }
-.btn:hover{border-color:var(--accent);color:var(--accent);}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px) rotate(-1deg);}
+.btn:nth-of-type(even):hover{transform:translateY(-2px) rotate(1deg);}
+.btn.primary:hover{color:#fff;}
+.wave{display:inline-block;transform-origin:70% 70%;}
+.btn:hover .wave{animation:wave-hi .6s ease-in-out;}
+@keyframes wave-hi{
+  0%,100%{transform:rotate(0deg);}
+  20%{transform:rotate(14deg);}
+  40%{transform:rotate(-8deg);}
+  60%{transform:rotate(14deg);}
+  80%{transform:rotate(-4deg);}
+}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
 .btn.primary:hover{opacity:.9;color:#fff;}
 
@@ -104,15 +136,19 @@ h1.name{font-weight:800;font-size:clamp(2.1rem,4.6vw,3.1rem);letter-spacing:-0.0
 /* ── tabs ─────────────────────────────────────── */
 .toc{
   max-width:960px;margin:0 auto;padding:0 28px;
-  display:flex;gap:26px;border-bottom:1px solid var(--line);overflow-x:auto;
+  display:flex;gap:26px;border-bottom:1px solid var(--line);overflow-x:auto;position:relative;
 }
 .toc button{
   font-family:var(--sans);font-weight:600;font-size:.9rem;color:var(--faint);
   background:none;border:none;padding:14px 2px;cursor:pointer;white-space:nowrap;
-  border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s ease,border-color .15s ease;
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s ease;
 }
 .toc button:hover{color:var(--ink);}
-.toc button.active{color:var(--ink);border-color:var(--accent);}
+.toc button.active{color:var(--ink);}
+.toc-indicator{
+  position:absolute;bottom:-1px;height:2px;background:var(--pop);left:0;width:0;
+  transition:transform .28s cubic-bezier(.4,0,.2,1), width .28s cubic-bezier(.4,0,.2,1);
+}
 
 /* ── panels ─────────────────────────────────────── */
 .panels{max-width:960px;margin:0 auto;padding:36px 28px 70px;}
@@ -139,14 +175,23 @@ h2.panel-title{font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;}
 .proj:hover{padding-left:8px;}
 .proj-tag{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-bottom:8px;display:block;}
 .proj h3{font-size:1.04rem;font-weight:700;line-height:1.35;margin-bottom:6px;}
-.proj-hint{font-family:var(--mono);font-size:.7rem;color:var(--faint);}
+.proj-hint{font-family:var(--mono);font-size:.7rem;color:var(--faint);display:inline-flex;align-items:center;gap:4px;}
+.proj-hint .arrow{display:inline-block;transition:transform .2s ease;}
+.proj:hover .proj-hint .arrow{transform:translateX(4px);color:var(--pop);}
+.proj:hover .proj-hint{color:var(--accent);}
 .proj p{display:none;}
 
 /* skills */
 .skill-block{margin-bottom:24px;}
 .skill-title{font-weight:700;font-size:.92rem;margin-bottom:12px;}
 .skill-pills{display:flex;flex-wrap:wrap;gap:8px;}
-.skill-pill{font-family:var(--mono);font-size:.78rem;padding:6px 12px;border:1px solid var(--line);border-radius:6px;color:var(--sub);}
+.skill-pill{
+  font-family:var(--mono);font-size:.78rem;padding:6px 12px;border:1px solid var(--line);
+  border-radius:6px;color:var(--sub);display:inline-block;
+  transition:transform .15s ease, border-color .15s ease, color .15s ease;
+}
+.skill-pill:hover{transform:translateY(-3px) rotate(-2deg);border-color:var(--accent);color:var(--accent);}
+.skill-pill:nth-child(even):hover{transform:translateY(-3px) rotate(2deg);}
 .mind{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:22px;background:var(--panel);}
 .mind p{max-width:none;font-size:.9rem;}
 .mind strong{color:var(--accent);}
@@ -203,13 +248,18 @@ footer{
 <header class="hero">
   <div class="eyebrow">Bengaluru, India</div>
   <h1 class="name">Pujitha Padmanabha</h1>
-  <div class="role">Embedded Systems Project Associate</div>
+  <div class="role-wrap">
+    <div class="role">Embedded Systems Project Associate</div>
+    <svg class="role-doodle" viewBox="0 0 340 12" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M2 8 C 40 2, 80 12, 120 6 C 160 1, 200 11, 240 5 C 270 1, 300 9, 338 4"/>
+    </svg>
+  </div>
   <p class="bio">I like figuring out how things work at the logic and circuit level — these days
   that's STM32 firmware, embedded protocols, and the occasional dive into RF. Happiest hands-on,
   chasing a signal that shouldn't be doing what it's doing until it finally clicks.</p>
   <div class="hero-actions">
     <a class="btn primary" href="Resume_Pujitha_Padmanabha_.pdf" target="_blank" rel="noopener">View résumé</a>
-    <a class="btn" href="mailto:pujitha.2104@gmail.com">Say hi</a>
+    <a class="btn" href="mailto:pujitha.2104@gmail.com">Say hi <span class="wave">👋</span></a>
     <a class="btn" href="https://linkedin.com/in/pujitha05" target="_blank" rel="noopener">LinkedIn</a>
   </div>
 
@@ -226,6 +276,7 @@ footer{
   <button data-panel="skills">Skills</button>
   <button data-panel="education">Education</button>
   <button data-panel="contact">Contact</button>
+  <span class="toc-indicator" id="tocIndicator"></span>
 </nav>
 
 <div class="panels">
@@ -306,7 +357,7 @@ footer{
       <div class="proj" tabindex="0" role="button" aria-haspopup="dialog" data-tag="ASIC / RTL / Cryptography" data-title="ASIC-Oriented RTL Implementation of ASCON-128" data-chips="Verilog,ASIC,FPGA">
         <span class="proj-tag">ASIC / RTL / Cryptography</span>
         <h3>ASIC-Oriented RTL Implementation of ASCON-128</h3>
-        <span class="proj-hint">Read more</span>
+        <span class="proj-hint">Read more <span class="arrow">→</span></span>
         <p>IoT devices are everywhere, and Ascon-128, NIST's lightweight authenticated encryption
         standard, was built for exactly this. We took it from spec to silicon: first exploring the two
         extremes (fully serial for minimal area, fully unrolled for max throughput), neither of which fit
@@ -317,7 +368,7 @@ footer{
       <div class="proj" tabindex="0" role="button" aria-haspopup="dialog" data-tag="Cache / Verification" data-title="MSHR-Based Non-Blocking Cache Verification" data-chips="Verilog,Cache,Testbench">
         <span class="proj-tag">Cache / Verification</span>
         <h3>MSHR-Based Non-Blocking Cache Verification</h3>
-        <span class="proj-hint">Read more</span>
+        <span class="proj-hint">Read more <span class="arrow">→</span></span>
         <p>Built and verified a 2-way set-associative non-blocking cache with 4-entry coalescing MSHRs,
         the structures that let a cache keep issuing requests on a miss instead of stalling dead until it
         comes back. Wrote a self-checking Verilog testbench to catch the edge cases where things quietly
@@ -326,14 +377,14 @@ footer{
       <div class="proj" tabindex="0" role="button" aria-haspopup="dialog" data-tag="ML / Security" data-title="Network Traffic Anomaly Detection" data-chips="MATLAB,ML">
         <span class="proj-tag">ML / Security</span>
         <h3>Network Traffic Anomaly Detection</h3>
-        <span class="proj-hint">Read more</span>
+        <span class="proj-hint">Read more <span class="arrow">→</span></span>
         <p>A MATLAB-based ML model trained to spot the fingerprints of DDoS, MITM, and SQL injection
         attacks buried in network traffic, hitting 90% detection accuracy.</p>
       </div>
       <div class="proj" tabindex="0" role="button" aria-haspopup="dialog" data-tag="IoT / Embedded" data-title="Music-Reactive Lights" data-chips="Arduino,IoT,Audio DSP">
         <span class="proj-tag">IoT / Embedded</span>
         <h3>Music-Reactive Lights</h3>
-        <span class="proj-hint">Read more</span>
+        <span class="proj-hint">Read more <span class="arrow">→</span></span>
         <p>An Arduino build that listens to audio in real time and reacts to it: colour and pattern
         shift with the signal, with tunable thresholds so it responds right for different kinds of
         music.</p>
@@ -450,6 +501,8 @@ footer{
     var next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+    btn.classList.add('spin');
+    setTimeout(function(){ btn.classList.remove('spin'); }, 400);
   });
 })();
 
@@ -457,14 +510,30 @@ footer{
 (function(){
   var buttons = document.querySelectorAll('.toc button');
   var panels = document.querySelectorAll('.panel');
-  function activate(name){
+  var indicator = document.getElementById('tocIndicator');
+  var toc = document.getElementById('toc');
+
+  function moveIndicator(btn){
+    var tocRect = toc.getBoundingClientRect();
+    var btnRect = btn.getBoundingClientRect();
+    indicator.style.width = btnRect.width + 'px';
+    indicator.style.transform = 'translateX(' + (btnRect.left - tocRect.left) + 'px)';
+  }
+
+  function activate(name, btn){
     buttons.forEach(function(b){ b.classList.toggle('active', b.dataset.panel === name); });
     panels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + name); });
     document.querySelector('.panels').scrollIntoView({behavior:'smooth', block:'start'});
+    moveIndicator(btn);
   }
   buttons.forEach(function(b){
-    b.addEventListener('click', function(){ activate(b.dataset.panel); });
+    b.addEventListener('click', function(){ activate(b.dataset.panel, b); });
   });
+  window.addEventListener('resize', function(){
+    var active = document.querySelector('.toc button.active');
+    if(active) moveIndicator(active);
+  });
+  moveIndicator(buttons[0]);
 })();
 
 /* project modal */
